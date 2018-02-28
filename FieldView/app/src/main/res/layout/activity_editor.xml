@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context="com.example.keke.notebook.EditorActivity">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/add_title_here"
+        android:inputType="textCapSentences"
+        android:textColor="#145844"
+        android:textColorHint="#51766e"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_add_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:hint="@string/add_date"
+        android:textColorHint="#51766e"
+        app:layout_constraintBottom_toBottomOf="@+id/date_icon"
+        app:layout_constraintStart_toEndOf="@+id/date_icon" />
+
+
+    <ImageView
+        android:id="@+id/title_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/ic_language_black_24dp" />
+
+    <ImageView
+        android:id="@+id/date_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:srcCompat="@mipmap/ic_date_range_black_24dp" />
+
+    <ImageView
+        android:id="@+id/location_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="43dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Longitude"
+        app:layout_constraintEnd_toEndOf="@+id/date_icon"
+        app:layout_constraintStart_toStartOf="@+id/date_icon"
+        app:layout_constraintTop_toBottomOf="@+id/date_icon"
+        app:srcCompat="@mipmap/ic_location_on_black_24dp" />
+
+    <Button
+        android:id="@+id/btnMap"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#44369136"
+        android:text="Map"
+        android:textColor="#51766e"
+        app:layout_constraintBottom_toBottomOf="@+id/location_icon"
+        app:layout_constraintEnd_toEndOf="@+id/tv_add_date"
+        app:layout_constraintStart_toStartOf="@+id/Longitude"
+        app:layout_constraintTop_toTopOf="@+id/location_icon" />
+
+
+    <TextView
+        android:id="@+id/Longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="205dp"
+        android:text="Longitude"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Latitude"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/Longitude"
+        app:layout_constraintTop_toBottomOf="@+id/Longitude" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:background="#0000"
+        android:onClick="openViz_ar2d"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Latitude"
+        app:srcCompat="@drawable/ar2dbtn" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:background="#0000"
+        android:onClick="openViz_ar3d"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:srcCompat="@drawable/ar3dbtn" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:background="#0000"
+        android:onClick="openViz_vr2d"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/imageButton1"
+        app:layout_constraintTop_toTopOf="@+id/imageButton3"
+        app:srcCompat="@drawable/vr2dbtn" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:onClick="openViz_3d"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageButton1"
+        app:srcCompat="@drawable/btn3d" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elevation"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="226dp" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Field View</string>
+    <string name="uid">UID</string>
+    <string name="your_uid">Your User ID</string>
+    <string name="title">Title</string>
+    <string name="your_title">Your Title</string>
+    <string name="send_request">Send Request</string>
+    <string name="response_from_server">Response From Server</string>
+    <string name="description">Description</string>
+    <string name="your_description">Your Description</string>
+    <string name="longitude">Longitude</string>
+    <string name="your_longitude">Your Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="your_latitude">Your Latitude</string>
+    <string name="altitude">Altitude</string>
+    <string name="your_altitude">Your Altitude</string>
+    <string name="created">Date</string>
+    <string name="your_created">Your Date</string>
+</resources>

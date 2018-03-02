@@ -194,24 +194,28 @@ public class EditorActivity extends AppCompatActivity implements
     public void openViz_ar2d(View view){
         Intent open2DARVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_2D_AR");
         open2DARVizApp.putExtra("localData", NotesProvider.getAllEntries());
+        open2DARVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
         startActivity(open2DARVizApp);
     }
 
     public void openViz_ar3d(View view){
         Intent open3DARVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_3D_AR");
         open3DARVizApp.putExtra("localData", NotesProvider.getAllEntries());
+        open3DARVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
         startActivity(open3DARVizApp);
     }
 
     public void openViz_vr2d(View view){
         Intent open2DVRVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_2D_VR");
         open2DVRVizApp.putExtra("localData", NotesProvider.getAllEntries());
+        open2DVRVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
         startActivity(open2DVRVizApp);
     }
 
     public void openViz_3d(View view){
         Intent open3DVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_3D_VR");
         open3DVizApp.putExtra("localData", NotesProvider.getAllEntries());
+        open3DVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
         startActivity(open3DVizApp);
     }
 

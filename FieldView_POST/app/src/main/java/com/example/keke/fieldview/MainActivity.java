@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 //this is the url where you want to send the request
-                String url = "http://10.201.151.219:8000/entry/";
+                String url = "http://10.234.88.22:8000/entry/";
                 Map<String, String> params = new HashMap<>();
                 params.put("uid", _uid.getText().toString());
                 params.put("title", _title.getText().toString());

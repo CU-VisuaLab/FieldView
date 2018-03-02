@@ -36,7 +36,6 @@ implements LoaderManager.LoaderCallbacks<Cursor>
 
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
-
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

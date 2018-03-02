@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import java.util.Random;
+
+import java.util.ArrayList;
 
 /**
  * Created by keke on 11/23/17.
@@ -29,6 +32,7 @@ public class NotesProvider extends ContentProvider{
 
     public static final String CONTENT_ITEM_TYPE = "Notes";
 
+    public static String allEntriesStr = "Hasn't been intitalized";
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, NOTES);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", NOTES_ID);
@@ -44,6 +48,10 @@ public class NotesProvider extends ContentProvider{
         return true;
     }
 
+    public static String getAllEntries() {
+        return allEntriesStr;
+    }
+
     @Nullable
     @Override
     public Cursor query( Uri uri,  String[] projection,  String selection, String[] selectionArgs, String sortOrder) {
@@ -52,9 +60,25 @@ public class NotesProvider extends ContentProvider{
             selection = DBOpenHelper.NOTE_ID + "=" + uri.getLastPathSegment();
         }
 
-        return database.query(DBOpenHelper.TABLE_NOTES, DBOpenHelper.ALL_COLUMNS,
+        Cursor allEntries = database.query(DBOpenHelper.TABLE_NOTES, DBOpenHelper.ALL_COLUMNS,
                 selection, null, null, null,
                 DBOpenHelper.NOTE_CREATED + " DESC");
+        allEntriesStr = "[";
+        if (allEntries.moveToFirst()) {
+            while (!allEntries.isAfterLast()) {
+                Random rand = new Random();
+                int randomElevation = 14000 + rand.nextInt(1000);
+                allEntriesStr += (
+                        "{\"title\": \"" + allEntries.getString(allEntries.getColumnIndex("noteText")) +
+                        "\", \"longitude\": \"-103.1234" + //allEntries.getString(allEntries.getColumnIndex("longitude")) +
+                        "\", \"latitude\": \"" + allEntries.getString(allEntries.getColumnIndex("latitude")) +
+                        "\", \"altitude\": \"" + Integer.toString(randomElevation) + "\"}, ");
+                allEntries.moveToNext();
+            }
+            allEntriesStr = allEntriesStr.substring(0, allEntriesStr.length() - 2);
+        }
+        allEntriesStr += ']';
+        return allEntries;
     }
 
     @Nullable

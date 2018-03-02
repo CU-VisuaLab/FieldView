@@ -62,7 +62,7 @@ public class EditorActivity extends AppCompatActivity implements
     private static String TAG = "AddNewData";
 
     private static final int ERROR_DIALOG_REQUEST = 9001;
-
+    private static String selectAllResponse = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +145,7 @@ public class EditorActivity extends AppCompatActivity implements
         }
     }
 
+
     private void displayLocation() {
             Latitude.setText("Latitude: " + currentLatitude );
             Longitude.setText("Longitude: " + currentLongitude );
@@ -192,25 +193,27 @@ public class EditorActivity extends AppCompatActivity implements
 
     public void openViz_ar2d(View view){
         Intent open2DARVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_2D_AR");
+        open2DARVizApp.putExtra("localData", NotesProvider.getAllEntries());
         startActivity(open2DARVizApp);
     }
 
     public void openViz_ar3d(View view){
         Intent open3DARVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_3D_AR");
+        open3DARVizApp.putExtra("localData", NotesProvider.getAllEntries());
         startActivity(open3DARVizApp);
     }
 
     public void openViz_vr2d(View view){
         Intent open2DVRVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_2D_VR");
+        open2DVRVizApp.putExtra("localData", NotesProvider.getAllEntries());
         startActivity(open2DVRVizApp);
     }
 
     public void openViz_3d(View view){
         Intent open3DVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_3D_VR");
+        open3DVizApp.putExtra("localData", NotesProvider.getAllEntries());
         startActivity(open3DVizApp);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -224,7 +227,6 @@ public class EditorActivity extends AppCompatActivity implements
                 deleteNote();
                 break;
         }
-
         return true;
     }
 
@@ -272,7 +274,7 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
         values.put(DBOpenHelper.NOTE_CREATED, current_time);
         values.put(DBOpenHelper.NOTE_LOC_LONGITUDE, currentLongitude);
-        values.put(DBOpenHelper.NOTE_LOC_LONGITUDE, currentLatitude);
+        values.put(DBOpenHelper.NOTE_LOC_LATITUDE, currentLatitude);
 
         getContentResolver().update(NotesProvider.CONTENT_URI, values, noteFilter, null);
         Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show();
@@ -284,7 +286,7 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
         values.put(DBOpenHelper.NOTE_CREATED, current_time);
         values.put(DBOpenHelper.NOTE_LOC_LONGITUDE, currentLongitude);
-        values.put(DBOpenHelper.NOTE_LOC_LONGITUDE, currentLatitude);
+        values.put(DBOpenHelper.NOTE_LOC_LATITUDE, currentLatitude);
 
         getContentResolver().insert(NotesProvider.CONTENT_URI, values);
         setResult(RESULT_OK);

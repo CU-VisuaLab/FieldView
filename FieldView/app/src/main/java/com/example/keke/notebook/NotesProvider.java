@@ -70,7 +70,7 @@ public class NotesProvider extends ContentProvider{
                 int randomElevation = 14000 + rand.nextInt(1000);
                 allEntriesStr += (
                         "{\"title\": \"" + allEntries.getString(allEntries.getColumnIndex("noteText")) +
-                        "\", \"longitude\": \"-103.1234" + //allEntries.getString(allEntries.getColumnIndex("longitude")) +
+                        "\", \"longitude\": \"" + allEntries.getString(allEntries.getColumnIndex("longitude")) +
                         "\", \"latitude\": \"" + allEntries.getString(allEntries.getColumnIndex("latitude")) +
                         "\", \"altitude\": \"" + Integer.toString(randomElevation) + "\"}, ");
                 allEntries.moveToNext();

@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +33,8 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class EditorActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -46,6 +47,10 @@ public class EditorActivity extends AppCompatActivity implements
     private LocationRequest mLocationRequest;
     private double currentLatitude;
     private double currentLongitude;
+
+    //Define mobileViz imgbuttons
+    private ImageButton barchartBtn;
+    private ImageButton scatterplotBtn;
 
     private TextView Longitude;
     private TextView Latitude;
@@ -69,9 +74,26 @@ public class EditorActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
+        //MobleViz btns
+        barchartBtn = findViewById(R.id.barChart);
+        barchartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBarchart();
+            }
+        });
+
+        scatterplotBtn = findViewById(R.id.scatterPlot);
+        scatterplotBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openScatterplot();
+            }
+        });
+
         Longitude = findViewById(R.id.Longitude);
         Latitude = findViewById(R.id.Latitude);
-;
+
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 // The next two lines tell the new client that “this” current class will handle connection stuff
@@ -182,6 +204,17 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
 
+    public void openBarchart(){
+        Intent intent = new Intent(this, BarChartActivity.class);
+        startActivity(intent);
+    }
+
+    public void openScatterplot(){
+        Intent intent = new Intent(this, ScatterPlotActivity.class);
+        startActivity(intent);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -194,28 +227,28 @@ public class EditorActivity extends AppCompatActivity implements
     public void openViz_ar2d(View view){
         Intent open2DARVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_2D_AR");
         open2DARVizApp.putExtra("localData", NotesProvider.getAllEntries());
-        open2DARVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
+        open2DARVizApp.putExtra("address", "http://192.168.0.195:8000/entry/");
         startActivity(open2DARVizApp);
     }
 
     public void openViz_ar3d(View view){
         Intent open3DARVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_3D_AR");
         open3DARVizApp.putExtra("localData", NotesProvider.getAllEntries());
-        open3DARVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
+        open3DARVizApp.putExtra("address", "http://192.168.0.195:8000/entry/");
         startActivity(open3DARVizApp);
     }
 
     public void openViz_vr2d(View view){
         Intent open2DVRVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_2D_VR");
         open2DVRVizApp.putExtra("localData", NotesProvider.getAllEntries());
-        open2DVRVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
+        open2DVRVizApp.putExtra("address", "http://192.168.0.195:8000/entry/");
         startActivity(open2DVRVizApp);
     }
 
     public void openViz_3d(View view){
         Intent open3DVizApp = getPackageManager().getLaunchIntentForPackage("com.visualab.Forteeners_3D_VR");
         open3DVizApp.putExtra("localData", NotesProvider.getAllEntries());
-        open3DVizApp.putExtra("address", "http://10.234.88.22:8000/entry/");
+        open3DVizApp.putExtra("address", "http://192.168.0.195:8000/entry/");
         startActivity(open3DVizApp);
     }
 

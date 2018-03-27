@@ -33,7 +33,8 @@ implements LoaderManager.LoaderCallbacks<Cursor>
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_NETWORK_STATE,
-            Manifest.permission.INTERNET
+            Manifest.permission.INTERNET,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
     private static final int INITIAL_REQUEST=1337;

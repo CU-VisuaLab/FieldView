@@ -94,6 +94,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/ImageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="488dp"
+        android:text="Image: None"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/takePicture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/takePictureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="452dp"
+        android:text="Take Picture"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/takePicture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/Latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -164,6 +184,17 @@
         tools:ignore="OnClick" />
 
     <ImageButton
+        android:id="@+id/takePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginTop="52dp"
+        android:background="#0000"
+        android:onClick="takePicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:srcCompat="@drawable/camera" />
+    <ImageButton
         android:id="@+id/scatterPlot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -187,6 +218,29 @@
         app:layout_constraintStart_toEndOf="@+id/scatterPlot"
         app:layout_constraintTop_toTopOf="@+id/scatterPlot"
         app:srcCompat="@drawable/piechart" />
+
+    <Button
+        android:id="@+id/localSync"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="32dp"
+        android:text="Sync to Local Team"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/takePicture"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+
+    <Button
+        android:id="@+id/localSync2"
+        android:layout_width="146dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="4dp"
+        android:text="Sync to Server"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/localSync"
+        app:layout_constraintTop_toBottomOf="@+id/localSync" />
 
 
 </android.support.constraint.ConstraintLayout>

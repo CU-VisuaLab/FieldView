@@ -13,7 +13,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -33,8 +36,11 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EditorActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -56,6 +62,7 @@ public class EditorActivity extends AppCompatActivity implements
 
     private TextView Longitude;
     private TextView Latitude;
+    private TextView ImageName;
 
     private String action;
     private EditText editor;
@@ -102,7 +109,7 @@ public class EditorActivity extends AppCompatActivity implements
 
         Longitude = findViewById(R.id.Longitude);
         Latitude = findViewById(R.id.Latitude);
-
+        ImageName = findViewById(R.id.ImageName);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 // The next two lines tell the new client that “this” current class will handle connection stuff
@@ -228,7 +235,48 @@ public class EditorActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    public void takePicture() {
+        dispatchTakePictureIntent();
+    }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.keke.notebook",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, 1);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        String mCurrentPhotoPath = image.getAbsolutePath();
+        ImageName.setText("Image: " + mCurrentPhotoPath);
+        return image;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

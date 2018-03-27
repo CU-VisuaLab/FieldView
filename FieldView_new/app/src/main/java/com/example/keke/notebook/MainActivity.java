@@ -1,5 +1,6 @@
 package com.example.keke.notebook;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -27,6 +28,15 @@ implements LoaderManager.LoaderCallbacks<Cursor>
     private static final int EDITOR_REQUEST_CODE = 10010;
     private CursorAdapter cursorAdapter;
 
+    private static final String[] INITIAL_PERMS={
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.INTERNET
+    };
+
+    private static final int INITIAL_REQUEST=1337;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +55,8 @@ implements LoaderManager.LoaderCallbacks<Cursor>
                 startActivityForResult(intent, EDITOR_REQUEST_CODE);
             }
         });
+
+        requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
 
         getLoaderManager().initLoader(0, null, this);
     }

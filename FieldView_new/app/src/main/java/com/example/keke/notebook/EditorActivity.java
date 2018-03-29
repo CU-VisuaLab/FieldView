@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
@@ -36,8 +38,25 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,7 +77,9 @@ public class EditorActivity extends AppCompatActivity implements
     private ImageButton barchartBtn;
     private ImageButton scatterplotBtn;
     private ImageButton pieChartBtn;
-
+    private ImageButton takePictureBtn;
+    private Button localSyncBtn;
+    private Button setLocationBtn;
 
     private TextView Longitude;
     private TextView Latitude;
@@ -76,6 +97,9 @@ public class EditorActivity extends AppCompatActivity implements
 
     private static final int ERROR_DIALOG_REQUEST = 9001;
     private static String selectAllResponse = "";
+
+    private String mCurrentPhotoPath;
+    private Bitmap bm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +128,30 @@ public class EditorActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 openPieChart();
+            }
+        });
+
+        takePictureBtn = findViewById(R.id.takePicture);
+        takePictureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture();
+            }
+        });
+
+        localSyncBtn = findViewById(R.id.localSync);
+        localSyncBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                syncLocal();
+            }
+        });
+
+        setLocationBtn = findViewById(R.id.setLocation);
+        setLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLocation();
             }
         });
 
@@ -253,7 +301,7 @@ public class EditorActivity extends AppCompatActivity implements
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.keke.notebook",
+                        "com.example.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, 1);
@@ -273,9 +321,113 @@ public class EditorActivity extends AppCompatActivity implements
         );
 
         // Save a file: path for use with ACTION_VIEW intents
-        String mCurrentPhotoPath = image.getAbsolutePath();
+        mCurrentPhotoPath = image.getAbsolutePath();
         ImageName.setText("Image: " + mCurrentPhotoPath);
         return image;
+    }
+
+    private void syncLocal() {
+        try {
+            bm = BitmapFactory.decodeFile(mCurrentPhotoPath);
+            executeMultipartPost();
+        } catch (Exception e) {
+            Log.e(e.getClass().getName(), e.getMessage());
+        }
+        try {
+            URL url = new URL("http://192.168.1.2:5000/image_location_server/addDataPoint");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            conn.setRequestProperty("Accept","application/json");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            File file = new File(mCurrentPhotoPath);
+
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("latitude", currentLatitude);
+            jsonParam.put("longitude", currentLongitude);
+            jsonParam.put("file_url", file.getName());
+
+            Log.i("JSON", jsonParam.toString());
+            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+            os.writeBytes(jsonParam.toString());
+
+            os.flush();
+            os.close();
+
+            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+            Log.i("MSG" , conn.getResponseMessage());
+
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void executeMultipartPost() throws Exception {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 75, bos);
+            byte[] data = bos.toByteArray();
+            HttpClient httpClient = new DefaultHttpClient();
+            File file = new File(mCurrentPhotoPath);
+            HttpPost postRequest = new HttpPost(
+                    "http://192.168.1.2:5000/image_location_server/add_image");
+            ByteArrayBody bab = new ByteArrayBody(data, file.getName());
+            // File file= new File("/mnt/sdcard/forest.png");
+            // FileBody bin = new FileBody(file);
+            MultipartEntity reqEntity = new MultipartEntity(
+                    HttpMultipartMode.BROWSER_COMPATIBLE);
+            reqEntity.addPart("uploaded", bab);
+            reqEntity.addPart("photoCaption", new StringBody("sfsdfsdf"));
+            postRequest.setEntity(reqEntity);
+            HttpResponse response = httpClient.execute(postRequest);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    response.getEntity().getContent(), "UTF-8"));
+            String sResponse;
+            StringBuilder s = new StringBuilder();
+
+            while ((sResponse = reader.readLine()) != null) {
+                s = s.append(sResponse);
+            }
+            System.out.println("Response: " + s);
+        } catch (Exception e) {
+            // handle exception here
+            Log.e(e.getClass().getName(), e.getMessage());
+        }
+    }
+
+    public void setLocation() {
+        try {
+            URL url = new URL("http://192.168.1.2:5000/fieldview/setLocation");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            conn.setRequestProperty("Accept","application/json");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("latitude", currentLatitude);
+            jsonParam.put("longitude", currentLongitude);
+
+            Log.i("JSON", jsonParam.toString());
+            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+            os.writeBytes(jsonParam.toString());
+
+            os.flush();
+            os.close();
+
+            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+            Log.i("MSG" , conn.getResponseMessage());
+
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

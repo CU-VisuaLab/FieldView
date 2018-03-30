@@ -1,0 +1,45 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:background="@drawable/bg"
+    tools:context="com.example.keke.notebook.MapsActivity">
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/GETbtn"
+        android:layout_marginTop="19dp"
+        tools:context="com.example.keke.notebook.MapsActivity" />
+
+    <TextView
+        android:id="@+id/_response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/map"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="133dp"
+        android:text="Response" />
+
+    <Button
+        android:id="@+id/GETbtn"
+        android:layout_width="63dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/_response"
+        android:background="#44369136"
+        android:text="GET"
+        android:textColor="#51766e" />
+
+</RelativeLayout>

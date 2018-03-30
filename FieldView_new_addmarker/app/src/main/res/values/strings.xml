@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FieldView</string>
+    <string name="are_you_sure">Are you sure to delete?</string>
+    <string name="all_deleted">Deleted</string>
+    <string name="new_note">Add New Note</string>
+    <string name="note_updated">Note updated</string>
+    <string name="action_Delete">Delete</string>
+    <string name="note_deleted">Note deleted</string>
+    <string name="add_title_here">Add Title</string>
+    <string name="add_date">Add Date</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

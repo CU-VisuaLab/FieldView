@@ -150,6 +150,12 @@ public class EditorActivity extends AppCompatActivity implements
         });
 
         setLocationBtn = findViewById(R.id.setLocation);
+        setLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLocation();
+            }
+        });
 
 
         Longitude = findViewById(R.id.Longitude);
@@ -332,7 +338,7 @@ public class EditorActivity extends AppCompatActivity implements
             Log.e(e.getClass().getName(), e.getMessage());
         }
         try {
-            URL url = new URL("http://192.168.1.2:5000/image_location_server/addDataPoint");
+            URL url = new URL("http://192.168.1.2:5000/fieldview/addDataPoint");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -345,6 +351,7 @@ public class EditorActivity extends AppCompatActivity implements
             jsonParam.put("latitude", currentLatitude);
             jsonParam.put("longitude", currentLongitude);
             jsonParam.put("file_url", file.getName());
+            jsonParam.put("scorch_rate", editor.getText());
 
             Log.i("JSON", jsonParam.toString());
             DataOutputStream os = new DataOutputStream(conn.getOutputStream());
@@ -371,7 +378,7 @@ public class EditorActivity extends AppCompatActivity implements
             HttpClient httpClient = new DefaultHttpClient();
             File file = new File(mCurrentPhotoPath);
             HttpPost postRequest = new HttpPost(
-                    "http://192.168.1.2:5000/image_location_server/add_image");
+                    "http://192.168.1.2:5000/fieldview/add_image");
             ByteArrayBody bab = new ByteArrayBody(data, file.getName());
             // File file= new File("/mnt/sdcard/forest.png");
             // FileBody bin = new FileBody(file);

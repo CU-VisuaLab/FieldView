@@ -76,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(MapsActivity.this);
                 // The URL where you want to send the request
-                String url = "http://10.201.150.84:5000/fieldview/getAllJson";
+                String url = "http://10.201.148.108:5000/fieldview/getAllJson";
 
                 // Initialize a new JsonArrayRequest instance
                 JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(

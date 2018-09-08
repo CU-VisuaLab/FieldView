@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context=".MobileVizActivity"
+    android:id="@+id/container">
+
+    <fragment
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:id="@+id/listView"
+        android:name="com.example.keke.notebook.DataListFragment"
+        tools:layout="@layout/fragment_data_list" />
+
+    <Button
+        android:id="@+id/btnArrayRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginTop="17dp"
+        android:background="#44369136"
+        android:text="Get Data"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/barChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="141dp"
+        android:layout_marginTop="98dp"
+        android:background="#0000"
+        android:onClick="openBarchart"
+        app:layout_constraintEnd_toStartOf="@+id/takePicture"
+        app:srcCompat="@drawable/barchart" />
+
+
+    <ImageButton
+        android:id="@+id/heatMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/barChart"
+        android:layout_marginEnd="104dp"
+        android:background="#0000"
+        android:onClick="openHeatMap"
+        app:srcCompat="@drawable/map" />
+
+
+    <TextView
+        android:id="@+id/txtResponse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="67dp"
+        android:padding="20dp" />
+
+
+
+</RelativeLayout>

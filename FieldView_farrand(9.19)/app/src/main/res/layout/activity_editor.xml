@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context="com.example.keke.notebook.EditorActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="28dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/title_icon"
+        app:layout_constraintEnd_toStartOf="@+id/idEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user" />
+
+    <EditText
+        android:id="@+id/userEditText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="201dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/add_title_here"
+        android:inputType="textCapSentences"
+        android:textColor="#145844"
+        android:textColorHint="#51766e"
+        app:layout_constraintBottom_toTopOf="@+id/tv_add_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/title_icon"
+        app:layout_constraintTop_toBottomOf="@+id/idEditText" />
+
+    <EditText
+        android:id="@+id/idEditText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/userID"
+        android:inputType="number"
+        android:textColor="#145844"
+        android:textColorHint="#51766e"
+        app:layout_constraintBottom_toTopOf="@+id/userEditText"
+        app:layout_constraintEnd_toStartOf="@+id/takePicture"
+        app:layout_constraintStart_toEndOf="@+id/userIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_add_date"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="88dp"
+        android:hint="@string/add_date"
+        android:textColorHint="#51766e"
+        app:layout_constraintBottom_toTopOf="@+id/longEditext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnMap"
+        app:layout_constraintStart_toEndOf="@+id/date_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userEditText" />
+
+
+    <ImageView
+        android:id="@+id/title_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="38dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/date_icon"
+        app:layout_constraintEnd_toStartOf="@+id/userEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userIcon"
+        app:srcCompat="@mipmap/ic_language_black_24dp" />
+
+    <ImageView
+        android:id="@+id/date_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="58dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/location_icon"
+        app:layout_constraintEnd_toStartOf="@+id/tv_add_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_icon"
+        app:srcCompat="@mipmap/ic_date_range_black_24dp" />
+
+    <ImageView
+        android:id="@+id/location_icon"
+        android:layout_width="43dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="86dp"
+        android:layout_marginEnd="199dp"
+        android:layout_marginStart="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/mountainIcon"
+        app:layout_constraintEnd_toStartOf="@+id/Latitude"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_icon"
+        app:srcCompat="@mipmap/ic_location_on_black_24dp" />
+
+    <Button
+        android:id="@+id/btnMap"
+        android:layout_width="115dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="25dp"
+        android:background="#44369136"
+        android:text="Map"
+        android:textColor="#51766e"
+        app:layout_constraintBottom_toTopOf="@+id/tv_add_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_icon" />
+
+
+    <TextView
+        android:id="@+id/Longitude"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="65dp"
+        android:layout_marginTop="70dp"
+        android:text="Longitude"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/longEditext"
+        app:layout_constraintEnd_toEndOf="@+id/btnMap"
+        app:layout_constraintStart_toStartOf="@+id/Latitude"
+        app:layout_constraintTop_toTopOf="@+id/btnMap" />
+
+    <TextView
+        android:id="@+id/ImageName"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:text="Image: None"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Latitude"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginTop="18dp"
+        android:text="Latitude"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/longEditext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/Longitude" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_marginBottom="116dp"
+        android:background="#0000"
+        android:onClick="openViz_ar2d"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton1"
+        app:layout_constraintTop_toBottomOf="@+id/scorchEditText"
+        app:srcCompat="@drawable/ar2dbtn" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="18dp"
+        android:background="#0000"
+        android:onClick="openViz_ar3d"
+        app:layout_constraintBottom_toTopOf="@+id/postData"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mountainIcon"
+        app:srcCompat="@drawable/ar3dbtn" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="68dp"
+        android:background="#0000"
+        android:onClick="openViz_vr2d"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/scorchEditText"
+        app:srcCompat="@drawable/vr2dbtn" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="1dp"
+        android:background="#0000"
+        android:onClick="openViz_3d"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton2"
+        app:srcCompat="@drawable/btn3d" />
+
+
+    <ImageButton
+        android:id="@+id/takePicture"
+        android:layout_width="103dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="46dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="50dp"
+        android:background="#0000"
+        android:onClick="takePicture"
+        app:layout_constraintBottom_toTopOf="@+id/btnMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idEditText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_camera_alt_black_48dp"
+        tools:ignore="OnClick" />
+
+
+    <Button
+        android:id="@+id/localSync"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="38dp"
+        android:background="#44369136"
+        android:text="Sync to Local Team"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/getData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/getData"
+        app:layout_constraintTop_toBottomOf="@+id/postData" />
+
+    <Button
+        android:id="@+id/setLocation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="2dp"
+        android:background="#44369136"
+        android:text="Set Location"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/localSync"
+        app:layout_constraintEnd_toEndOf="@+id/localSync"
+        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/postData" />
+
+    <Button
+        android:id="@+id/postData"
+        android:layout_width="161dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="17dp"
+        android:background="#44369136"
+        android:text="Post Data"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/setLocation"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+    <Button
+        android:id="@+id/getData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="1dp"
+        android:background="#44369136"
+        android:onClick="pullData"
+        android:text="Get Data"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/localSync"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postData" />
+
+    <ImageView
+        android:id="@+id/mountainIcon"
+        android:layout_width="29dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton1"
+        app:layout_constraintEnd_toStartOf="@+id/scorchEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_icon"
+        app:srcCompat="@drawable/mountain" />
+
+    <EditText
+        android:id="@+id/scorchEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:layout_marginEnd="185dp"
+        android:ems="10"
+        android:hint="@string/add_elevation_here"
+        android:inputType="numberDecimal"
+        android:textColor="#145844"
+        android:textColorHint="#51766e"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mountainIcon"
+        app:layout_constraintTop_toBottomOf="@+id/longEditext" />
+
+    <EditText
+        android:id="@+id/longEditext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="91dp"
+        android:layout_marginEnd="177dp"
+        android:ems="10"
+        android:hint="@string/add_long_here"
+        android:textColor="#145844"
+        android:textColorHint="#51766e"
+        app:layout_constraintBottom_toTopOf="@+id/scorchEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_date" />
+
+    <EditText
+        android:id="@+id/latEditext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/add_lat_here"
+        android:textColor="#145844"
+        android:textColorHint="#51766e"
+        app:layout_constraintEnd_toStartOf="@+id/setLocation"
+        app:layout_constraintStart_toStartOf="@+id/longEditext"
+        app:layout_constraintTop_toBottomOf="@+id/longEditext" />
+
+
+</android.support.constraint.ConstraintLayout>
